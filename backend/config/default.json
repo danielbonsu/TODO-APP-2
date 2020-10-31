@@ -1,0 +1,3 @@
+{
+  "mongoURI": "mongodb+srv://danielbonsu:Veedeenana2020@cluster0.knnp4.mongodb.net/todo-app?retryWrites=true&w=majority"
+}
