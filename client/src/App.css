@@ -28,7 +28,7 @@ a {
 .container {
   margin-top: 200px;
   width: 390px;
-  height: 700px;
+  height: 900px;
   overflow: scroll;
   background-color: #e4e3e3;
 }
@@ -236,4 +236,22 @@ a {
   height: 40px;
   text-align: center;
   padding: 10px;
+}
+
+.todolist-banner {
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgb(0, 0, 0);
+  padding: 10px;
+  margin-bottom: 10px;
+  color: #fff;
+}
+
+.bannerContainer {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

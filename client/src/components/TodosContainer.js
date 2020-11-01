@@ -116,6 +116,13 @@ const TodosContainer = () => {
         </form>
       </div>
 
+      <div className="bannerContainer">
+        <div className="todolist-banner">
+          <span>Current List</span>
+          <span>Total: {todos.length}</span>
+        </div>
+      </div>
+
       <div className="todoItems">
         {todos &&
           todos.map((todo) => (

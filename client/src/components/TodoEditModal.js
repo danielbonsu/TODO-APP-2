@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import Alert from "../components/alerts/Alerts";
+import { setAlert } from "../redux/actions/AlertActions";
 import {
   cancelTodoEdit,
   updateTodo,
@@ -24,6 +26,9 @@ const TodoEditModal = () => {
     e.preventDefault();
     dispatch(updateTodo(editData));
     dispatch(cancelTodoEdit());
+    dispatch(
+      setAlert("todo updated successfully", "success")
+    );
   };
 
   const { current } = useSelector((state) => state.todos);
