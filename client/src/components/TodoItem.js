@@ -4,12 +4,18 @@ import {
   deleteTodo,
   editTodo,
 } from "../redux/actions/TodoActions";
-import { toggleTodoModal } from "../redux/actions/UIDynamicsAction";
+
 const TodoItem = ({ todo }) => {
   const dispatch = useDispatch();
   return (
     <Fragment>
-      <div className="todoItemContainer">
+      <div
+        className={
+          todo.isCompleted
+            ? "todoItemContainer todoCompleted"
+            : "todoItemContainer"
+        }
+      >
         <p>{todo.todoNotes}</p>
         <div className="modifiers">
           <i

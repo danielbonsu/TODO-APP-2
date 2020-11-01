@@ -5,6 +5,8 @@ import {
   EDIT_TODO,
   CANCEL_TODO_EDIT,
   UPDATE_TODO,
+  GET_COMPLETED,
+  CLEAR_COMPLETED,
 } from "../types";
 import axios from "axios";
 
@@ -37,10 +39,31 @@ export const editTodo = (todo_obj) => (dispatch) => {
   });
 };
 
-export const updateTodo = (updated_todo) => (dispatch) => {
+export const updateTodo = (todo) => async (dispatch) => {
+  console.log(todo._id);
+  try {
+    const res = await axios.put(`/api/todos/${todo._id}`);
+
+    console.log(res);
+
+    dispatch({
+      type: UPDATE_TODO,
+      payload: res.data,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getCompleted = () => (dispatch) => {
   dispatch({
-    type: UPDATE_TODO,
-    payload: updated_todo,
+    type: GET_COMPLETED,
+  });
+};
+
+export const clearCompleted = () => (dispatch) => {
+  dispatch({
+    type: CLEAR_COMPLETED,
   });
 };
 

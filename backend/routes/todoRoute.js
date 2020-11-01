@@ -46,6 +46,42 @@ router.post(
   }
 );
 
+router.put("/:id", async (req, res) => {
+  // find todo object, delete it and replace it with new
+  try {
+    let todo = await TodoModel.findById(req.params.id);
+
+    if (!todo)
+      return res
+        .status(404)
+        .json({ error: "todo not found" });
+
+    let updatedTodo = {};
+
+    if (todo.todoNotes) {
+      updatedTodo.todoNotes = todo.todoNotes;
+    }
+    if (todo.deadline) {
+      updatedTodo.todoType = todo.deadline;
+    }
+    if (todo._id) {
+      updatedTodo._id = todo._id;
+    }
+
+    updatedTodo.isCompleted = true;
+
+    todo = await TodoModel.findByIdAndUpdate(
+      req.params.id,
+      { $set: updatedTodo },
+      { new: true }
+    );
+
+    return res.send(updatedTodo);
+  } catch (error) {
+    res.status(error);
+  }
+});
+
 router.delete("/:id", async (req, res) => {
   try {
     let todo = await TodoModel.findById(req.params.id);

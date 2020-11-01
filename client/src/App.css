@@ -98,6 +98,7 @@ a {
   color: #fff;
   font-size: 18px;
   font-weight: bold;
+  border-radius: 5px;
 }
 
 .modifiers {
@@ -153,6 +154,10 @@ a {
   display: flex;
   justify-content: center;
   align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 77;
 }
 .overlay-cover {
   width: 100%;
@@ -169,7 +174,7 @@ a {
   height: 500px;
   background: #ffff;
   z-index: 99;
-  margin-top: 250px;
+  margin-top: 160px;
 }
 
 .modal .modal-header {
@@ -254,4 +259,8 @@ a {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.todoCompleted {
+  border-left: 8px solid rgb(37, 124, 34);
 }

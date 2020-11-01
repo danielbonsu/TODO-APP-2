@@ -4,6 +4,8 @@ import TodoItem from "./TodoItem";
 import {
   addTodo,
   getAllTodos,
+  getCompleted,
+  clearCompleted,
 } from "../redux/actions/TodoActions";
 
 import Alert from "../components/alerts/Alerts";
@@ -11,7 +13,12 @@ import { setAlert } from "../redux/actions/AlertActions";
 
 const TodosContainer = () => {
   const dispatch = useDispatch();
-  const { todos } = useSelector((state) => state.todos);
+  const { todos, completed } = useSelector(
+    (state) => state.todos
+  );
+
+  console.log(completed);
+
   const { alerts } = useSelector((state) => state.alerts);
   console.log(alerts);
   const [data, setData] = useState({
@@ -20,6 +27,11 @@ const TodosContainer = () => {
   });
 
   const { todoNotes, deadline } = data;
+
+  const [
+    isCompletedAvailable,
+    setIsCompletedAvailable,
+  ] = useState(false);
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -62,9 +74,16 @@ const TodosContainer = () => {
       </div>
       <div className="todoFilters">
         <div className="all-todos filterItem ">
-          <a href="#!" className="filterItemLink">
+          <a
+            href="#!"
+            className="filterItemLink"
+            onClick={() => {
+              dispatch(clearCompleted());
+            }}
+          >
             <i class="fas fa-list-alt"></i>
             <h5>ALL</h5>
+            {todos && todos.length}
           </a>
         </div>
         <div className="completed-todos filterItem">
@@ -74,9 +93,18 @@ const TodosContainer = () => {
           </a>
         </div>
         <div className="active-todos filterItem">
-          <a href="#!" className="filterItemLink">
+          <a
+            href="#!"
+            className="filterItemLink"
+            onClick={() => dispatch(getCompleted())}
+          >
             <i class="fas fa-clipboard-check"></i>
             <h5>Completed</h5>
+            {
+              todos.filter(
+                (todo) => todo.isCompleted === true
+              ).length
+            }
           </a>
         </div>
 
@@ -124,10 +152,13 @@ const TodosContainer = () => {
       </div>
 
       <div className="todoItems">
-        {todos &&
-          todos.map((todo) => (
-            <TodoItem key={todo._id} todo={todo} />
-          ))}
+        {completed
+          ? completed.map((todo) => (
+              <TodoItem key={todo._id} todo={todo} />
+            ))
+          : todos.map((todo) => (
+              <TodoItem key={todo._id} todo={todo} />
+            ))}
       </div>
     </div>
   );

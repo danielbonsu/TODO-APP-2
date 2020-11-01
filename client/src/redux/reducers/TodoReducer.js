@@ -5,10 +5,12 @@ import {
   EDIT_TODO,
   CANCEL_TODO_EDIT,
   UPDATE_TODO,
+  GET_COMPLETED,
+  CLEAR_COMPLETED,
 } from "../types";
 
 export const todoReducer = (
-  state = { todos: [], current: "" },
+  state = { todos: [], current: "", completed: "" },
   action
 ) => {
   const { type, payload } = action;
@@ -42,6 +44,20 @@ export const todoReducer = (
         todos: state.todos.map((todo) =>
           todo._id === payload._id ? payload : todo
         ),
+      };
+
+    case GET_COMPLETED:
+      return {
+        ...state,
+        completed: state.todos.filter(
+          (todo) => todo.isCompleted === true
+        ),
+      };
+
+    case CLEAR_COMPLETED:
+      return {
+        ...state,
+        completed: "",
       };
 
     case CANCEL_TODO_EDIT:

@@ -13,13 +13,22 @@ const TodoEditModal = () => {
   const [editData, setEditData] = useState({
     todoNotes: "",
     deadline: "",
+    isCompleted: false,
   });
 
   const onChange = (e) => {
-    setEditData({
-      ...editData,
-      [e.target.name]: e.target.value,
-    });
+    if (e.target.checked) {
+      setEditData({
+        ...editData,
+        [e.target.name]: e.target.value,
+      });
+      setEditData({ ...editData, isCompleted: true });
+    } else {
+      setEditData({
+        ...editData,
+      });
+      setEditData({ ...editData, isCompleted: false });
+    }
   };
 
   const onSubmit = (e) => {
@@ -29,11 +38,12 @@ const TodoEditModal = () => {
     dispatch(
       setAlert("todo updated successfully", "success")
     );
+    // console.log(editData);
   };
 
   const { current } = useSelector((state) => state.todos);
 
-  const { todoNotes, deadline } = editData;
+  const { todoNotes, deadline, isCompleted } = editData;
 
   useEffect(() => {
     if (current !== null || "") {
@@ -82,6 +92,15 @@ const TodoEditModal = () => {
               value={deadline}
               onChange={onChange}
             />
+            <input
+              type="checkbox"
+              name="isCompleted"
+              id="isCompleted"
+              className="isCompleted"
+              value={isCompleted}
+              onChange={onChange}
+            />{" "}
+            Mark as Completed
             <input
               type="submit"
               value={current ? "Update Todo" : "Add Todo"}
