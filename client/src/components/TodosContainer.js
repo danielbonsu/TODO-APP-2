@@ -6,10 +6,14 @@ import {
   getAllTodos,
 } from "../redux/actions/TodoActions";
 
+import Alert from "../components/alerts/Alerts";
+import { setAlert } from "../redux/actions/AlertActions";
+
 const TodosContainer = () => {
   const dispatch = useDispatch();
   const { todos } = useSelector((state) => state.todos);
-
+  const { alerts } = useSelector((state) => state.alerts);
+  console.log(alerts);
   const [data, setData] = useState({
     todoNotes: "",
     deadline: "",
@@ -20,7 +24,16 @@ const TodosContainer = () => {
   const onSubmit = (e) => {
     e.preventDefault();
 
-    dispatch(addTodo(data));
+    if (data.todoNotes === "" || data.deadline === "") {
+      dispatch(
+        setAlert("No field should be blank ", "danger")
+      );
+    } else {
+      dispatch(addTodo(data));
+      dispatch(
+        setAlert("Todo Added successfully", "success")
+      );
+    }
 
     setData({
       todoNotes: "",
@@ -38,6 +51,12 @@ const TodosContainer = () => {
 
   return (
     <div className="container">
+      {alerts &&
+        alerts.map((alert) => (
+          <Alert key={alert.id} variant={alert.variant}>
+            {alert.msg}
+          </Alert>
+        ))}
       <div className="header">
         <h4>TODO APP</h4>
       </div>
