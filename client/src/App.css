@@ -10,7 +10,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #f3f3f3;
+  background-color: #252525;
 }
 
 a {
@@ -150,19 +150,25 @@ a {
 .overlay {
   width: 100%;
   height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.overlay-cover {
+  width: 100%;
+  height: 100%;
   position: absolute;
   top: 0;
   left: 0;
   background-color: #000;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  opacity: 0.8;
 }
 
 .overlay .modal {
   width: 500px;
   height: 500px;
   background: #ffff;
+  z-index: 99;
 }
 
 .modal .modal-header {

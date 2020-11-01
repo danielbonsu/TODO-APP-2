@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { toggleTodoModal } from "../redux/actions/UIDynamicsAction";
+import {
+  cancelTodoEdit,
+  updateTodo,
+} from "../redux/actions/TodoActions";
 
 const TodoEditModal = () => {
+  const dispatch = useDispatch();
+
   const [editData, setEditData] = useState({
     todoNotes: "",
     deadline: "",
   });
-
-  const { todoNotes, deadline } = editData;
 
   const onChange = (e) => {
     setEditData({
@@ -19,23 +22,26 @@ const TodoEditModal = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(editData);
+    dispatch(updateTodo(editData));
+    dispatch(cancelTodoEdit());
   };
 
-  const dispatch = useDispatch();
+  const { current } = useSelector((state) => state.todos);
 
-  const { toggleModal } = useSelector(
-    (state) => state.todoModal
-  );
+  const { todoNotes, deadline } = editData;
 
-  console.log(toggleModal);
+  useEffect(() => {
+    if (current !== null || "") {
+      setEditData(current);
+    }
+  }, [current, setEditData]);
 
   return (
     <div
-      className={
-        !toggleModal ? "overlay hideModal" : "overlay"
-      }
+      className={!current ? "overlay hideModal" : "overlay"}
     >
+      <div className="overlay-cover"></div>
+
       <div className="modal">
         <div className="modal-header">
           <h4>
@@ -44,7 +50,7 @@ const TodoEditModal = () => {
           </h4>
           <i
             className="fas fa-times-circle"
-            onClick={() => dispatch(toggleTodoModal())}
+            onClick={() => dispatch(cancelTodoEdit())}
           ></i>
         </div>
 
@@ -73,7 +79,7 @@ const TodoEditModal = () => {
             />
             <input
               type="submit"
-              value="Add Todo"
+              value={current ? "Update Todo" : "Add Todo"}
               className="submitBTN"
             />
           </form>

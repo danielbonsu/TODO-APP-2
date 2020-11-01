@@ -21,6 +21,11 @@ const TodosContainer = () => {
     e.preventDefault();
 
     dispatch(addTodo(data));
+
+    setData({
+      todoNotes: "",
+      deadline: "",
+    });
   };
 
   const onChange = (e) => {
@@ -70,6 +75,7 @@ const TodosContainer = () => {
             type="text"
             name="todoNotes"
             id="todoNotes"
+            placeholder="Enter anything"
             className="todoNotes"
             value={todoNotes}
             onChange={onChange}

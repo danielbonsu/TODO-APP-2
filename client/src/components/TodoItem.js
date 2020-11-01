@@ -1,6 +1,9 @@
 import React, { Fragment } from "react";
 import { useDispatch } from "react-redux";
-import { deleteTodo } from "../redux/actions/TodoActions";
+import {
+  deleteTodo,
+  editTodo,
+} from "../redux/actions/TodoActions";
 import { toggleTodoModal } from "../redux/actions/UIDynamicsAction";
 const TodoItem = ({ todo }) => {
   const dispatch = useDispatch();
@@ -15,7 +18,7 @@ const TodoItem = ({ todo }) => {
           ></i>
           <i
             className="fas fa-edit"
-            onClick={() => dispatch(toggleTodoModal())}
+            onClick={() => dispatch(editTodo(todo))}
           ></i>
         </div>
       </div>
