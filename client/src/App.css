@@ -10,7 +10,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #252525;
+  background-color: #f3f3f3;
 }
 
 a {
@@ -145,4 +145,72 @@ a {
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+}
+
+.overlay {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.overlay .modal {
+  width: 500px;
+  height: 500px;
+  background: #ffff;
+}
+
+.modal .modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #7a7a7a;
+}
+
+.modal-header h4 {
+  width: 120px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 22px;
+}
+
+.modal-header i {
+  font-size: 20px;
+}
+
+.modal-header .fa-times-circle:hover {
+  color: red;
+  cursor: pointer;
+}
+
+.modal-body {
+  padding: 20px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hideModal {
+  display: none;
+}
+.edit-modal-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.modal-body input {
+  margin-top: 20px;
+  height: 60px;
+  text-align: center;
+  font-size: 18px;
 }

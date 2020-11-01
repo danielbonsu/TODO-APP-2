@@ -55,6 +55,13 @@ const TodosContainer = () => {
             <h5>Completed</h5>
           </a>
         </div>
+
+        <div className="active-todos filterItem">
+          <a href="#!" className="filterItemLink">
+            <i class="fas fa-clipboard-check"></i>
+            <h5>OverDue</h5>
+          </a>
+        </div>
       </div>
       <div className="todoBody">
         <form className="todoForm" onSubmit={onSubmit}>
